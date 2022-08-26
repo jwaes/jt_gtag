@@ -17,6 +17,21 @@
                 });
             </script>
         </t>
+        <t t-else="">
+            <t t-set="logged_partner" t-value="request.env['website.visitor']._get_visitor_from_request().partner_id"/>
+            <t t-set="logged_visitor" t-value="request.env['website.visitor']._get_visitor_from_request()"/>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-P3QBC1PL6C', {
+                    <t t-if="logged_partner">
+                    'user_id':'P<t t-esc="logged_partner.id"/>',
+                    </t>
+                    'debug_mode':true,
+                });
+            </script>
+        </t>
     </xpath>
 </template>    
 
